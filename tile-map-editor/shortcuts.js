@@ -2,8 +2,9 @@ import { keyDown } from "../astro-engine/core/input.js";
 import { setTool, tools } from "./tool-selector.js";
 
 const toolKeyMap = {
-    "v": "mouse",
+    "r": "rectangle",
     "esc": "mouse",
+    "v": "mouse",
     "b": "brush",
 }
 

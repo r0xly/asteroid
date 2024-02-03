@@ -2,6 +2,7 @@ import { startEngine } from "./astro-engine/astro.js";
 import "./tile-map-editor/camera-controller.js";
 import "./astro-engine/core/render.js";
 import "./tile-map-editor/grid.js";
+import "./tile-map-editor/tile-selector.js";
 import "./tile-map-editor/shortcuts.js";
 import { gameObject } from "./astro-engine/core/gameObject.js";
 import { Sprite } from "./astro-engine/sprites/sprite.js";
