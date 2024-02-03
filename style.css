@@ -81,6 +81,7 @@ canvas {
     background-color: #323232;
     margin: 5px;
     border-bottom: 0px;
+    overflow: auto;
 }
 
 .window-header {
@@ -93,6 +94,13 @@ canvas {
     margin-bottom: 2px;
     font-family: monospace;
     color: white;
+}
+
+.window-container {
+    width: calc(100% - 14px);
+
+    margin: 7px;
+    background-color: #323232;
 }
 
 .window h1 {

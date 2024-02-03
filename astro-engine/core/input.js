@@ -1,58 +1,65 @@
-import { astroCanvas } from "../astro.js";
+import { astroCanvas, start } from "../astro.js";
 import { createEvent } from "../util/event.js";
 import { Vector } from "../util/vector.js";
 import { camera } from "./camera.js";
 
 export let keysDown = {};
 export let isMouseDown = false;
-export let mousePosition = new Vector();
 
 export const [keyUp, emitKeyUp] = createEvent();
 export const [keyDown, emitKeyDown] = createEvent();
 export const [mouseUp, emitMouseUp] = createEvent();
 export const [mouseDown, emitMouseDown] = createEvent();
 
-window.onmousemove = ({ clientX, clientY }) => {
-    if (!astroCanvas)
-        return;
+let localMousePosition = new Vector();
 
-    const { left, top }= astroCanvas.getBoundingClientRect();
-    mousePosition.x = (clientX - left - astroCanvas.width / 2) / camera.zoom;
-    mousePosition.y = -(clientY - top - astroCanvas.height / 2) / camera.zoom;
-}
 
-export function getMousePosition() {
-    return mousePosition.add(camera.position.x * camera.zoom, camera.position.y * camera.zoom);    
-}
+start(canvas => {
+    canvas.onmousemove = ({ clientX, clientY }) => {
+        if (!astroCanvas)
+            return;
 
-window.onmousedown = event => {
-    emitMouseDown();
-    isMouseDown = true;
-}
+        const { left, top } = astroCanvas.getBoundingClientRect();
 
-window.onmouseup = event => {
-    emitMouseUp();
-    isMouseDown = false;
-}
+        localMousePosition.x = (clientX - left - astroCanvas.width / 2) / camera.zoom;
+        localMousePosition.y = -(clientY - top - astroCanvas.height / 2) / camera.zoom;
+    }
 
-window.onkeyup = event => {
-    const key = event.key.toLocaleLowerCase();
+    canvas.onmousedown = event => {
+        emitMouseDown();
+        isMouseDown = true;
+    }
+    canvas.onmouseup = event => {
+        emitMouseUp();
+        isMouseDown = false;
+    }
 
-    emitKeyUp(key);
+    window.onkeyup = event => {
+        const key = event.key.toLocaleLowerCase();
 
-    delete keysDown[key];
-}
+        emitKeyUp(key);
 
-window.onkeydown = event => {
-    const key = event.key.toLocaleLowerCase();
+        delete keysDown[key];
+    }
 
-    if (event.target.nodeName === "INPUT")
-        return;
+    window.onkeydown = event => {
+        const key = event.key.toLocaleLowerCase();
 
-    emitKeyDown(key);
+        if (event.target.nodeName === "INPUT")
+            return;
 
-    keysDown[key] = true;
-}
+        emitKeyDown(key);
+
+        keysDown[key] = true;
+    }
+
+
+
+})
+
+export const getMousePosition = () => localMousePosition.add(camera.position.x, camera.position.y);    
+export const getLocalMousePosition = () => new Vector(localMousePosition.x, localMousePosition.y);
+
 
 window.onblur = () => {
     for (const key in keysDown)

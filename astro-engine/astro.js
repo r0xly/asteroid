@@ -13,8 +13,8 @@ export function startEngine(canvas) {
     astroCanvas = canvas;
     //ctx.imageSmoothingEnabled = false;
 
-    fireInit();
-    fireStart();
+    fireInit(canvas);
+    fireStart(canvas);
 
     let previousUpdateTime = performance.now();
 
