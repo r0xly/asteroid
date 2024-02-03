@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tilemap Editor</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <script src="index.js" type="module" defer></script> 
+</head>
+<body>
+    <div class="toolbar">
+            <button><img src="./mouse-icon.png"></button>
+            <button><img src="./mouse-icon.png"></button>
+            <button><img src="./mouse-icon.png"></button>
+    </div>
+    <div class="editor">
+        <div class="window" style="width: calc(100% - 500px); height: 97%">
+            <div class="window-header">Canvas</div>
+            <div class="tabs">
+                <button class="main-button">World 1</button>
+                <button class="main-button">World 1</button>
+                <button class="invisble-button">+</button>
+            </div>
+            <canvas id="canvas"></canvas>
+        </div>
+
+        <div class="side-bar">
+            <div class="window">
+                <div class="window-header">Tiles</div>
+            </div>
+
+            <div class="window">
+                <div class="window-header">Layers</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
