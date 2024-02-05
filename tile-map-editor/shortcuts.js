@@ -5,6 +5,7 @@ const toolKeyMap = {
     "r": "rectangle",
     "esc": "mouse",
     "v": "mouse",
+    "l": "line",
     "b": "brush",
 }
 

@@ -24,7 +24,7 @@ export const setPreviewTile = (x, y, layer, tiledId) =>  {
     previewTiles.push(gameObject({
         size: [TILE_SIZE, TILE_SIZE],
         position: [TILE_SIZE * x, TILE_SIZE * y],
-        render: spriteImage.getSprite(tiledId.x, tileObjects.y),
+        render: spriteImage.getSprite(tiledId.x, tiledId.y),
     }))
 }
 

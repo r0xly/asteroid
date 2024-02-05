@@ -3,12 +3,14 @@ import { getMousePosition, mouseDown, mouseUp } from "../astro-engine/core/input
 import { Vector } from "../astro-engine/util/vector.js";
 import { TILE_SIZE } from "./grid.js";
 import { updateBrushTool } from "./tools/brush.js";
+import { endLineTool, startLineTool, updateLineTool } from "./tools/line.js";
 import { endRectangleTool, startRectangleTool, updateRectangleTool } from "./tools/rectangle.js";
 
 export const tools = {
     mouse: "mouse",
     brush: "brush",
-    rectangle: "rectangle"
+    rectangle: "rectangle",
+    line: "line",
 }
 
 export let activeTool = tools.mouse;
@@ -34,6 +36,8 @@ mouseUp(() => {
 
     if (activeTool === tools.rectangle)
         endRectangleTool(tilePosition);
+    else if (activeTool === tools.line)
+        endLineTool(tilePosition);
 });
 
 mouseDown(() => {
@@ -45,6 +49,8 @@ mouseDown(() => {
 
     if (activeTool === tools.rectangle)
         startRectangleTool(tilePosition);
+    else if (activeTool === tools.line)
+        startLineTool(tilePosition);
 });
 
 update(deltaTime => {
@@ -58,5 +64,8 @@ update(deltaTime => {
         updateBrushTool(deltaTime, tilePosition, previousSelectedTile);
     else if (activeTool === tools.rectangle)
         updateRectangleTool(tilePosition);
+    else if (activeTool === tools.line)
+        updateLineTool(tilePosition);
+
     previousSelectedTile = tilePosition;
 });
