@@ -7,6 +7,6 @@ import { TILE_SIZE } from "../grid.js";
  * @returns { Vector }
  */
 export const getSelectedTile = position => new Vector(
-    Math.round(position.x / TILE_SIZE),
-    Math.round(position.y / TILE_SIZE)
+    Math.floor(position.x / TILE_SIZE),
+    Math.floor(position.y / TILE_SIZE)
 )
