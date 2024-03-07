@@ -10,6 +10,8 @@ export const [keyUp, emitKeyUp] = createEvent();
 export const [keyDown, emitKeyDown] = createEvent();
 export const [mouseUp, emitMouseUp] = createEvent();
 export const [mouseDown, emitMouseDown] = createEvent();
+export const [mouseMove, emitMouseMove] = createEvent();
+export const [wheel, emitWheel] = createEvent();
 
 let localMousePosition = new Vector();
 
@@ -23,16 +25,19 @@ start(canvas => {
 
         localMousePosition.x = (clientX - left - astroCanvas.width / 2) / camera.zoom;
         localMousePosition.y = -(clientY - top - astroCanvas.height / 2) / camera.zoom;
+        emitMouseMove(getMousePosition()); 
     }
 
     canvas.onmousedown = event => {
-        emitMouseDown();
+        emitMouseDown(getMousePosition());
         isMouseDown = true;
     }
     canvas.onmouseup = event => {
-        emitMouseUp();
+        emitMouseUp(getMousePosition());
         isMouseDown = false;
     }
+
+    canvas.onwheel = emitWheel;
 
     window.onkeyup = event => {
         const key = event.key.toLocaleLowerCase();

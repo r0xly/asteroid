@@ -99,7 +99,6 @@ canvas {
 .window-container {
     width: calc(100% - 14px);
     position: relative;
-
     margin: 7px;
     background-color: #323232;
 }
@@ -158,4 +157,13 @@ canvas {
     height: 64px;
     border: 4px solid white;
     border-radius: 4px;
+}
+
+.layer-button {
+    width: 100%;
+    height: 35px;
+    color: white;
+    font-size: 18px;
+    padding-left: 20px;
+    box-sizing: border-box;
 }

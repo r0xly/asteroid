@@ -1,25 +1,26 @@
-// @ts-nocheck
-import { start, update } from "../astro-engine/astro.js";
+import { update } from "../astro-engine/astro.js";
 import { camera } from "../astro-engine/core/camera.js";
-import { gameObject } from "../astro-engine/core/gameObject.js";
-import { isMouseDown, mouseDown, getLocalMousePosition } from "../astro-engine/core/input.js";
+import { isMouseDown, mouseDown, wheel, getLocalMousePosition } from "../astro-engine/core/input.js";
 import { Vector } from "../astro-engine/util/vector.js";
-import { activeTool, tools } from "./tool-selector.js";
+import { mouseTool } from "./tool/implementations/mouse-tool.js";
+import { getActiveTool } from "./tool/tool-controller.js";
 
 const ZOOM_IN_MULTIPLIER = 1.25;
 const ZOOM_OUT_MULTIPLIER = 0.8125;
 
-window.onwheel = function(event) {
-    if (activeTool !== tools.mouse)
+const dragStartPosition = Vector.Zero;  
+const dragStartMouse = Vector.Zero;
+
+const isMouseActive = () => getActiveTool() === mouseTool;
+
+wheel((event) =>  {
+    if (!isMouseActive())
         return;
 
     const zoomFactor = event.deltaY > 0 ? ZOOM_OUT_MULTIPLIER : ZOOM_IN_MULTIPLIER;
     camera.zoom *= zoomFactor;
-} 
+}); 
 
-
-const dragStartPosition = Vector.Zero;  
-const dragStartMouse = Vector.Zero;
 
 mouseDown(() => {
     const mousePosition = getLocalMousePosition();
@@ -32,7 +33,7 @@ mouseDown(() => {
 });
 
 update(() => {
-    if (!isMouseDown || activeTool !== tools.mouse)
+    if (!isMouseDown || !isMouseActive())
         return;
 
     const mousePosition = getLocalMousePosition();

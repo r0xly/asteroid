@@ -1,7 +1,7 @@
-import { clearPreviewTiles, setPreviewTile, setTile } from "../grid.js";
-import { CURRENT_LAYER } from "../layers.js";
-import { selectedSpriteId } from "../tile-selector.js";
-import { setTool, tools } from "../tool-selector.js";
+import { clearPreviewTiles, setPreviewTile, setTile } from "../../grid.js";
+import { CURRENT_LAYER } from "../../layers.js";
+import { selectedSpriteId } from "../../tile-selector.js";
+//import { setTool, tools } from "../../tool-selector.js";
 
 let startTile;
 
@@ -22,7 +22,7 @@ export const endRectangleTool = (selectedTile) => {
     if (!startTile || !selectedTile)
         return clearPreviewTiles();
     drawRectangle(startTile, selectedTile);
-    setTool(tools.mouse);
+    //setTool(tools.mouse);
     startTile = undefined;
 }
 

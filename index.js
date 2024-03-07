@@ -1,21 +1,27 @@
 import { startEngine } from "./astro-engine/astro.js";
-import "./tile-map-editor/camera-controller.js";
 import "./astro-engine/core/render.js";
+
+import "./tile-map-editor/camera-controller.js";
+import "./tile-map-editor/tool/tool-controller.js";
+
 import "./tile-map-editor/grid.js";
 import "./tile-map-editor/tile-selector.js";
-import "./tile-map-editor/shortcuts.js";
+import "./tile-map-editor/grid/layers.js";
 import { gameObject } from "./astro-engine/core/gameObject.js";
 import { Sprite } from "./astro-engine/sprites/sprite.js";
-import { setBackgroundColor } from "./astro-engine/core/render.js";
+import { createLayer } from "./tile-map-editor/grid/layers.js";
+
 
 const canvas = document.getElementById("canvas");
 startEngine(canvas);
 
-
-window.onresize = event => {
+const updateCanvasSize = () => {
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
 }
+
+window.onresize = updateCanvasSize;
+updateCanvasSize();
 
 /** 
 gameObject({
@@ -24,5 +30,5 @@ gameObject({
 })
 */
 
-canvas.width = canvas.clientWidth;
-canvas.height = canvas.clientHeight;
+
+//createLayer(100);

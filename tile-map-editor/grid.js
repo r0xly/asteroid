@@ -8,12 +8,6 @@ export let GRID_HEIGHT = 50 * 32;
 
 
 const layers = {};
-
-
-export function getTile(x, y) {
-    
-}
-
 let previewTiles = [];
 
 export const setPreviewTile = (x, y, layer, tiledId) =>  {
@@ -28,7 +22,8 @@ export const setPreviewTile = (x, y, layer, tiledId) =>  {
     }))
 }
 
-export const clearPreviewTiles = () => previewTiles.forEach(deleteObject);
+export const clearPreviewTiles = () => 
+    previewTiles.forEach(deleteObject);
 
 export function setTile(x, y, layer, tileId) {
     if (GRID_WIDTH < (2 * TILE_SIZE * Math.abs(x)) || GRID_HEIGHT < (2 * TILE_SIZE * Math.abs(y)))
@@ -47,7 +42,7 @@ export function setTile(x, y, layer, tileId) {
         size: [TILE_SIZE, TILE_SIZE],
         position: [TILE_SIZE * x, TILE_SIZE * y],
         render: spriteImage.getSprite(tileId.x, tileId.y),
-    })
+    });
 
     tiles[`${x},${y}`] = {
         id: tileId,
@@ -60,10 +55,11 @@ const tileObjects = [];
 function drawGrid() {
     tileObjects.forEach(deleteObject);
 
-    for (let x = -GRID_WIDTH / 2; x <= GRID_WIDTH / 2; x += TILE_SIZE)
-        for (let y = -GRID_HEIGHT / 2; y <= GRID_HEIGHT / 2; y += TILE_SIZE)
+    for (let x = -GRID_WIDTH / 2; x < GRID_WIDTH / 2; x += TILE_SIZE)
+        for (let y = -GRID_HEIGHT / 2; y < GRID_HEIGHT / 2; y += TILE_SIZE)
             tileObjects.push(gameObject({
                 position: [x, y],
+                positionPivot: [0, 1],
                 size: [TILE_SIZE, TILE_SIZE],
                 layer: -1,
                 color: "none",
