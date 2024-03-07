@@ -18,6 +18,7 @@ export const setPreviewTile = (x, y, layer, tiledId) =>  {
     previewTiles.push(gameObject({
         size: [TILE_SIZE, TILE_SIZE],
         position: [TILE_SIZE * x, TILE_SIZE * y],
+        positionPivot: [0, 1],
         render: spriteImage.getSprite(tiledId.x, tiledId.y),
     }))
 }
@@ -42,6 +43,7 @@ export function setTile(x, y, layer, tileId) {
         size: [TILE_SIZE, TILE_SIZE],
         position: [TILE_SIZE * x, TILE_SIZE * y],
         render: spriteImage.getSprite(tileId.x, tileId.y),
+        positionPivot: [0, 1],
     });
 
     tiles[`${x},${y}`] = {
