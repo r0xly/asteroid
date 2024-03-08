@@ -1,16 +1,17 @@
 import { Vector } from "../../../astro-engine/util/vector.js";
 import { setTile } from "../../grid.js";
-import { CURRENT_LAYER } from "../../layers.js";
+import { getSelectedLayer } from "../../grid/layer-controller.js";
+import { drawTile } from "../../grid/tile-controller.js";
 import { selectedSpriteId } from "../../tile-selector.js";
 import { createTool } from "../tool-builder.js";
 
 
 /**
  * Draws a line between two points
- * @param {Vector} startPoint - The tile ID where the line starts
- * @param {Vector} endPoint - The tile ID where the line ends
- * @param {Object} tileType - The tile to draw
- * @param {number} layer - The layer which the tile will be drawn at  
+ * @param { Vector } startPoint - The tile ID where the line starts
+ * @param { Vector } endPoint - The tile ID where the line ends
+ * @param { Object = } tileType - The tile to draw
+ * @param { import("../../grid/layer-controller.js").Layer = } layer - The layer which the tile will be drawn at  
  */
 export const drawLine = (startPoint, endPoint, tileType, layer) => {
     let x0 = startPoint.x;
@@ -25,7 +26,7 @@ export const drawLine = (startPoint, endPoint, tileType, layer) => {
     let err = dx - dy;
 
     while (true) {
-        setTile(x0, y0, layer, tileType);
+        drawTile(x0, y0, tileType, layer);
         
         if (x0 === x1 && y0 === y1) 
             break;
@@ -38,17 +39,17 @@ export const drawLine = (startPoint, endPoint, tileType, layer) => {
 
 let startPoint = Vector.Zero;
 
-const onMouseDown = (tileId) => {
+const onMouseDown = tileId => {
     startPoint.x = tileId.x;
     startPoint.y = tileId.y;
 }
 
-const onMouseUp = (tileId) => {
-    drawLine(startPoint, tileId, selectedSpriteId, CURRENT_LAYER);
+const onMouseUp = tileId => {
+    drawLine(startPoint, tileId, selectedSpriteId);
 }
 
-const onMouseMove = (tileId) => {
-
+const onMouseMove = tileId => {
+    // TODO: draw a preview line
 }
 
 export const lineTool = createTool("Line", "l", onMouseDown, onMouseUp, onMouseMove);;

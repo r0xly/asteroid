@@ -1,1 +1,0 @@
-export let CURRENT_LAYER = 1;

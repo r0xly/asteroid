@@ -6,10 +6,11 @@ import "./tile-map-editor/tool/tool-controller.js";
 
 import "./tile-map-editor/grid.js";
 import "./tile-map-editor/tile-selector.js";
-import "./tile-map-editor/grid/layers.js";
+import "./tile-map-editor/grid/layer-controller.js";
 import { gameObject } from "./astro-engine/core/gameObject.js";
 import { Sprite } from "./astro-engine/sprites/sprite.js";
-import { createLayer } from "./tile-map-editor/grid/layers.js";
+import { createLayer } from "./tile-map-editor/grid/layer-controller.js";
+import { Vector } from "./astro-engine/util/vector.js";
 
 
 const canvas = document.getElementById("canvas");
@@ -30,5 +31,3 @@ gameObject({
 })
 */
 
-
-//createLayer(100);

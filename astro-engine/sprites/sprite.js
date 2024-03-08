@@ -15,6 +15,7 @@ export class Sprite {
         image.src = src;
         this.sx = sx;
         this.sy = sy;
+        this.image = image;
         this.src = src;
         this.inverse = inverse;
         this.sHeight = sHeight || this.image.height;

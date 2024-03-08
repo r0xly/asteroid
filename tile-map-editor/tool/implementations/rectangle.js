@@ -1,6 +1,5 @@
+/** 
 import { clearPreviewTiles, setPreviewTile, setTile } from "../../grid.js";
-import { CURRENT_LAYER } from "../../layers.js";
-import { selectedSpriteId } from "../../tile-selector.js";
 //import { setTool, tools } from "../../tool-selector.js";
 
 let startTile;
@@ -34,5 +33,6 @@ export const drawRectangle = (pointA, pointB, preview = false)  => {
 
     for (let x = startX; x <= endX; x++)
         for (let y = startY; y <= endY; y++)
-            (preview ? setPreviewTile : setTile)(x, y, CURRENT_LAYER, selectedSpriteId);
+            (preview ? setPreviewTile : setTile)(x, y, getSelectedLayer(), selectedSpriteId);
 }
+*/

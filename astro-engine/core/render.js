@@ -132,6 +132,8 @@ update((deltaTime, canvas, ctx) => {
             renderSprite(ctx, position, object.size, render);
         else if (render instanceof TextLabel)
             renderTextLabel(ctx, position, object.size, render);
+        else if (render instanceof HTMLCanvasElement) 
+            ctx.drawImage(render, position.x, position.y)
         else { 
             renderRect(ctx, position, object.size, object.color);
         }
