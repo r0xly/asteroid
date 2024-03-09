@@ -9,7 +9,7 @@
  * @property { string } name
  */
 
-const emptyToolEvent = () => {};
+const defaultToolBehavior = () => {};
 
 /** @type { Map<string, Tool> } */
 export const toolKeybindMap = new Map();
@@ -29,9 +29,9 @@ export const toolNameMap = new Map();
 export const createTool = (name, keybind, onMouseDown, onMouseUp, onMouseMove) => {
     /** @type { Tool } */
     const tool =  {
-        onMouseDown: onMouseDown || emptyToolEvent,
-        onMouseMove: onMouseMove || emptyToolEvent,
-        onMouseUp: onMouseUp || emptyToolEvent,
+        onMouseDown: onMouseDown || defaultToolBehavior,
+        onMouseMove: onMouseMove || defaultToolBehavior,
+        onMouseUp: onMouseUp || defaultToolBehavior,
         keybind: keybind,
         name: name,
     }

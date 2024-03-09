@@ -1,10 +1,11 @@
 import { keyDown, mouseDown, mouseMove, mouseUp } from "../../astro-engine/core/input.js";
 import { getSelectedTile } from "../grid/tile-controller.js";
-import { mouseTool } from "./implementations/mouse-tool.js";
 import { toolKeybindMap } from "./tool-builder.js";
+import { mouseTool } from "./implementations/mouse-tool.js";
 
 import "./implementations/line-tool.js";
 import "./implementations/brush-tool.js";
+import "./implementations/rectangle-tool.js";
 
 let activeTool = mouseTool;
 

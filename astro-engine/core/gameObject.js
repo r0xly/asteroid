@@ -9,7 +9,7 @@ import { TextLabel } from "./text-label.js";
  * @property {Sprite|string|undefined=} renderOverride
  * @property {Vector} positionPivot
  * @property {Vector} rotationPivot
- * @property {Sprite|string|TextLabel} render
+ * @property {Sprite|string|TextLabel|HTMLCanvasElement} render
  * @property {number} rotation
  * @property {Vector} position
  * @property {number} strokeWidth
@@ -113,7 +113,7 @@ export function deleteObject(gameObject) {
  *  alpha?: number,
  *  rotation?: number,
  *  components?: Object[],
- *  render?: string|Sprite|TextLabel,
+ *  render?: string|Sprite|TextLabel|HTMLCanvasElement,
  *  strokeWidth?: number,
  *  strokeColor?: string,
  *  layer?: number,

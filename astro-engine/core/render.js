@@ -40,7 +40,6 @@ function renderTextLabel(ctx, position, size, textLabel){
 
         if (testWidth > size.x && i > 0) {
             ctx.fillText(line, x, y);
-            console.log(x)
             line = words[i] + ' ';
             y += lineHeight;
         } else {
@@ -143,4 +142,4 @@ update((deltaTime, canvas, ctx) => {
     }
 
     ctx.setTransform(1, 0, 0, 1, 0, 0);
-});
+})

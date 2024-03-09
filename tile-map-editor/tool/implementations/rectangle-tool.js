@@ -1,40 +1,26 @@
 import { Vector } from "../../../astro-engine/util/vector.js";
-import { setTile } from "../../grid.js";
 import { getSelectedLayer } from "../../grid/layer-controller.js";
 import { clearPreview, disablePreviewMode, drawTile, enablePreviewMode } from "../../grid/tile-controller.js";
 import { selectedSpriteId } from "../../tile-selector.js";
-import { createTool } from "../tool-builder.js";
+import { createTool, toolKeybindMap } from "../tool-builder.js";
 
 
 /**
- * Draws a line between two points
+ * Draws a rectnalge between two points
  * @param { Vector } startPoint - The tile ID where the line starts
  * @param { Vector } endPoint - The tile ID where the line ends
  * @param { Object = } tileType - The tile to draw
  * @param { import("../../grid/layer-controller.js").Layer = } layer - The layer which the tile will be drawn at  
  */
-export const drawLine = (startPoint, endPoint, tileType, layer) => {
-    let x0 = startPoint.x;
-    let y0 = startPoint.y;
-    let x1 = endPoint.x;
-    let y1 = endPoint.y;
+export const drawRectangle = (startPoint, endPoint, tileType, layer) => {
+    const startX = Math.min(startPoint.x, endPoint.x);
+    const startY = Math.min(startPoint.y, endPoint.y); 
+    const endX = Math.max(startPoint.x, endPoint.x);
+    const endY = Math.max(startPoint.y, endPoint.y);
 
-    const dx = Math.abs(x1 - x0);
-    const dy = Math.abs(y1 - y0);
-    const sx = Math.sign(x1 - x0);
-    const sy = Math.sign(y1 - y0);
-    let err = dx - dy;
-
-    while (true) {
-        drawTile(x0, y0, tileType, layer);
-        
-        if (x0 === x1 && y0 === y1) 
-            break;
-
-        const e2 = 2 * err;
-        if (e2 > -dy) { err -= dy; x0 += sx; }
-        if (e2 < dx) { err += dx; y0 += sy; }
-    }
+    for (let x = startX; x <= endX; x++)
+        for (let y = startY; y <= endY; y++)
+            drawTile(x, y, tileType, layer);
 }
 
 let startPoint = Vector.Zero;
@@ -47,12 +33,11 @@ const onMouseDown = tileId => {
     enablePreviewMode();
 }
 
-
 const onMouseUp = tileId => {
     mouseDown = false;
 
     disablePreviewMode();
-    drawLine(startPoint, tileId, selectedSpriteId);
+    drawRectangle(startPoint, tileId, selectedSpriteId);
 }
 
 const onMouseMove = tileId => {
@@ -60,7 +45,7 @@ const onMouseMove = tileId => {
         return;
 
     clearPreview();
-    drawLine(startPoint, tileId, selectedSpriteId);
+    drawRectangle(startPoint, tileId, selectedSpriteId);
 }
 
-export const lineTool = createTool("Line", "l", onMouseDown, onMouseUp, onMouseMove);
+export const lineTool = createTool("Rectangle", "r", onMouseDown, onMouseUp, onMouseMove);;

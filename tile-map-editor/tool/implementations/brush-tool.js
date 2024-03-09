@@ -1,4 +1,5 @@
 import { drawTile } from "../../grid/tile-controller.js";
+import { selectedSpriteId } from "../../tile-selector.js";
 import { createTool } from "../tool-builder.js"
 import { drawLine } from "./line-tool.js";
 
@@ -16,7 +17,7 @@ const onMouseUp = tileId => {
 
 const onMouseMove = tileId => {
     if (brushActive && previousTile)
-        drawLine(previousTile, tileId);
+        drawLine(previousTile, tileId, selectedSpriteId);
 
     previousTile = tileId;
 }

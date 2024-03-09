@@ -1,16 +1,12 @@
 /**
  * @typedef { Object } Layer
- * @param { import("../../astro-engine/core/gameObject.js").GameObject } gameObject
  * @param { (x: number, y: number) => void } drawTile
- * @param { CanvasRenderingContext2D } ctx
- * @param { HTMLCanvasElement } canvas
- * @param { number } order 
  */
 
 import { gameObject } from "../../astro-engine/core/gameObject.js";
-import { Sprite } from "../../astro-engine/sprites/sprite.js";
 import { Vector } from "../../astro-engine/util/vector.js";
 import { GRID_HEIGHT, GRID_WIDTH, TILE_SIZE } from "../grid.js";
+import { selectedSpriteId, spriteImage } from "../tile-selector.js";
 
 
 /**
@@ -24,29 +20,42 @@ export const createLayer = (order) => {
     canvas.height = GRID_HEIGHT;
 
     const ctx = canvas.getContext("2d");
-    ctx.translate(GRID_WIDTH / 2, GRID_HEIGHT / 2);
+    ctx?.translate(GRID_WIDTH / 2, GRID_HEIGHT / 2);
+    ctx.imageSmoothingEnabled = false;
 
-    const object = gameObject({
+    gameObject({
         layer: order,
         size: new Vector(GRID_WIDTH, GRID_HEIGHT),
         render: canvas,
     });
 
-    /**
-     * @param { number } x 
-     * @param { number } y
-     */
-    const drawTile = (x, y) => {
-        y += 1;
-        ctx.fillRect(x * TILE_SIZE, -y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-    }
-
+    /** @type { Layer } */
     const layer = {
-        order: order,
-        gameObject: object,
-        canvas: canvas,
-        ctx: ctx,
-        drawTile: drawTile,
+        drawTile: (x, y, tileType) => {
+            
+            ctx?.clearRect(
+                x * TILE_SIZE,
+                -(y + 1) * TILE_SIZE,
+                TILE_SIZE,
+                TILE_SIZE
+                )
+                
+            if (tileType) {
+                const { image, sx, sy, sWidth, sHeight } = spriteImage.getSprite(tileType.x, tileType.y);
+                ctx?.drawImage(
+                    image,
+                    sx,
+                    sy,
+                    sWidth,
+                    sHeight,
+                    x * TILE_SIZE, 
+                    -(y + 1) * TILE_SIZE, 
+                    TILE_SIZE, 
+                    TILE_SIZE
+                );
+                }
+
+        },
     }
 
     return layer;
