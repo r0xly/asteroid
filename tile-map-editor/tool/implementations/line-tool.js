@@ -1,6 +1,5 @@
 import { Vector } from "../../../astro-engine/util/vector.js";
 import { setTile } from "../../grid.js";
-import { getSelectedLayer } from "../../grid/layer-controller.js";
 import { clearPreview, disablePreviewMode, drawTile, enablePreviewMode } from "../../grid/tile-controller.js";
 import { selectedSpriteId } from "../../tile-selector.js";
 import { createTool } from "../tool-builder.js";
@@ -11,7 +10,7 @@ import { createTool } from "../tool-builder.js";
  * @param { Vector } startPoint - The tile ID where the line starts
  * @param { Vector } endPoint - The tile ID where the line ends
  * @param { Object = } tileType - The tile to draw
- * @param { import("../../grid/layer-controller.js").Layer = } layer - The layer which the tile will be drawn at  
+ * @param { import("../../grid/layer.js").Layer = } layer - The layer which the tile will be drawn at  
  */
 export const drawLine = (startPoint, endPoint, tileType, layer) => {
     let x0 = startPoint.x;
