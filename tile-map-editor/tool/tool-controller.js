@@ -6,6 +6,7 @@ import { mouseTool } from "./implementations/mouse-tool.js";
 import "./implementations/line-tool.js";
 import "./implementations/brush-tool.js";
 import "./implementations/rectangle-tool.js";
+import "./implementations/circle-tool.js";
 
 let activeTool = mouseTool;
 
