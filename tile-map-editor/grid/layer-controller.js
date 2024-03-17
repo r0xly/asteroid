@@ -1,7 +1,6 @@
 import { Layer } from "./layer.js"
 
 
-
 /** @type { Map<number, Layer> } */
 export const layerOrderMap = new Map();
 

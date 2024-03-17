@@ -11,10 +11,10 @@ const ZOOM_OUT_MULTIPLIER = 0.8125;
 const dragStartPosition = Vector.Zero;  
 const dragStartMouse = Vector.Zero;
 
-const isMouseActive = () => getActiveTool() === mouseTool;
+const isMouseToolActive = () => getActiveTool() === mouseTool;
 
 wheel((event) =>  {
-    if (!isMouseActive())
+    if (!isMouseToolActive())
         return;
 
     const zoomFactor = event.deltaY > 0 ? ZOOM_OUT_MULTIPLIER : ZOOM_IN_MULTIPLIER;
@@ -33,7 +33,7 @@ mouseDown(() => {
 });
 
 update(() => {
-    if (!isMouseDown || !isMouseActive())
+    if (!isMouseDown || !isMouseToolActive())
         return;
 
     const mousePosition = getLocalMousePosition();
