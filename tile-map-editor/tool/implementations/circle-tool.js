@@ -3,9 +3,9 @@ import { clearPreview, disablePreviewMode, drawTile, enablePreviewMode } from ".
 import { selectedSpriteId } from "../../tile-selector.js";
 import { createTool } from "../tool-builder.js";
 
-const isInsidecirlce = (center, tile, diameter) => {
-    const dx = center.x - tile.x;
-    const dy = center.y - tile.y;
+const isPointInsidecirlce = (center, point, diameter) => {
+    const dx = center.x - point.x;
+    const dy = center.y - point.y;
 
     const distnaceSqaured = dx * dx + dy * dy;
 
@@ -31,13 +31,10 @@ export const drawCircle = (centerPoint, endPoint, tileType, layer) => {
 
 
 
-    for (let y = top; y <= bottom; y++) {
-        for (let x = left; x <= right; x++) {
-            if (isInsidecirlce(centerPoint, new Vector(x, y), radius * 2)) {
+    for (let y = top; y <= bottom; y++) 
+        for (let x = left; x <= right; x++) 
+            if (isPointInsidecirlce(centerPoint, new Vector(x, y), radius * 2)) 
                 drawTile(x, y, tileType, layer);
-            }
-        }
-    }
 }
 
 
