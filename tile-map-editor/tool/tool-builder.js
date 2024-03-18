@@ -21,9 +21,9 @@ export const toolNameMap = new Map();
  * Creates a tool object and binds it to a key
  * @param { string } name - The tool's name 
  * @param { string } keybind - The tool's keybind (must be unique)
- * @param { ToolEvent = } onMouseDown - Runs when the mouse button is down while the tool is active
- * @param { ToolEvent = } onMouseUp - Runs when the mouse button is up and the tool is active
- * @param { ToolEvent = } onMouseMove - Runs when the mouse moves while the tool is active
+ * @param { ToolEvent = } onMouseDown - Runs when the mouse button is pressed down if the tool is active
+ * @param { ToolEvent = } onMouseUp - Runs when the mouse button is let go if the and tool if active
+ * @param { ToolEvent = } onMouseMove - Runs while the mouse is moving and tool is active
  * @returns { Tool }
  */
 export const createTool = (name, keybind, onMouseDown, onMouseUp, onMouseMove) => {

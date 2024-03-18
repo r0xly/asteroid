@@ -167,3 +167,8 @@ canvas {
     padding-left: 20px;
     box-sizing: border-box;
 }
+
+
+dialog {
+    top: 50%;
+}

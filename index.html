@@ -8,6 +8,7 @@
     <script src="index.js" type="module" defer></script> 
 </head>
 <body>
+
     <div class="header">
         <button>File</button>
         <button>Edit</button>
@@ -30,6 +31,11 @@
         <div class="side-bar">
             <div class="window">
                 <div class="window-header">Tiles</div>
+
+                <select name="Tile" size="1">
+                    <option value="Tilemap 1">Tilemap 1</option>
+                </select>
+                <button>Import </button>
                 <div class="window-container" id="spritesheet">
                     <div class="sprite-selector" id="sprite-selector"></div>
                     <img src="./plains.png" id="image" style="image-rendering: pixelated; width: 384px; user-select: none; pointer-events: none;">
@@ -45,6 +51,20 @@
                 </div>
             </div>
         </div>
+
+        <dialog open>
+            <form method="dialog">
+                <h1>Import Tilemap</h1>
+
+                <label for="tilemal-name">Name:</label>
+                <input type="text" id="tilemap-name" name="tilemal-name" required minlength="4" maxlength="16" placeholder="Tilemap 1"/>
+                <input type="number"/>
+                <br>
+                <button>Import</button>
+
+            </form>
+        </dialog>
+
     </div>
 </body>
 </html>

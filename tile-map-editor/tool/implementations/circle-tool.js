@@ -24,12 +24,10 @@ const isPointInsidecirlce = (center, point, diameter) => {
 export const drawCircle = (centerPoint, endPoint, tileType, layer) => {
     const radius = centerPoint.sub(endPoint).magnitude;
 
-    const top = Math.ceil(centerPoint.y - radius);
     const bottom = Math.floor(centerPoint.y + radius);
-    const left = Math.ceil(centerPoint.x - radius);
     const right = Math.floor(centerPoint.x + radius);
-
-
+    const left = Math.ceil(centerPoint.x - radius);
+    const top = Math.ceil(centerPoint.y - radius);
 
     for (let y = top; y <= bottom; y++) 
         for (let x = left; x <= right; x++) 

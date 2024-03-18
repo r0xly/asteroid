@@ -16,7 +16,7 @@ const onMouseUp = tileId => {
 }
 
 const onMouseMove = tileId => {
-    if (brushActive && previousTile)
+    if (brushActive && previousTile !== undefined)
         drawLine(previousTile, tileId, selectedSpriteId);
 
     previousTile = tileId;
