@@ -1,6 +1,7 @@
+import { Sprite } from "../../../astro-engine/sprites/sprite.js";
 import { Vector } from "../../../astro-engine/util/vector.js";
 import { clearPreview, disablePreviewMode, drawTile, enablePreviewMode } from "../../grid/tile-controller.js";
-import { selectedSpriteId } from "../../tile-selector.js";
+import { getSelectedSprite } from "../../tilemap/tilemap-controller.js";
 import { createTool } from "../tool-builder.js";
 
 const isPointInsidecirlce = (center, point, diameter) => {
@@ -17,11 +18,11 @@ const isPointInsidecirlce = (center, point, diameter) => {
  * Draws a circle from an center point to an end point
  * @param { Vector } centerPoint - The tile ID where the line starts
  * @param { Vector } endPoint - The tile ID where the line ends
- * @param { Object = } tileType - The tile to draw
+ * @param { Sprite = } sprite - The tile sprite to draw
  * @param { import("../../grid/layer.js").Layer = } layer - The layer which the tile will be drawn at  
  */
 
-export const drawCircle = (centerPoint, endPoint, tileType, layer) => {
+export const drawCircle = (centerPoint, endPoint, sprite, layer) => {
     const radius = centerPoint.sub(endPoint).magnitude;
 
     const bottom = Math.floor(centerPoint.y + radius);
@@ -32,7 +33,7 @@ export const drawCircle = (centerPoint, endPoint, tileType, layer) => {
     for (let y = top; y <= bottom; y++) 
         for (let x = left; x <= right; x++) 
             if (isPointInsidecirlce(centerPoint, new Vector(x, y), radius * 2)) 
-                drawTile(x, y, tileType, layer);
+                drawTile(x, y, sprite, layer);
 }
 
 
@@ -51,7 +52,7 @@ const onMouseUp = tileId => {
     mouseDown = false;
 
     disablePreviewMode();
-    drawCircle(startPoint, tileId, selectedSpriteId);
+    drawCircle(startPoint, tileId, getSelectedSprite());
 }
 
 const onMouseMove = tileId => {
@@ -59,7 +60,7 @@ const onMouseMove = tileId => {
         return;
 
     clearPreview();
-    drawCircle(startPoint, tileId, selectedSpriteId);
+    drawCircle(startPoint, tileId, getSelectedSprite());
 }
 
 export const circleTool = createTool("Circle", "c", onMouseDown, onMouseUp, onMouseMove);;

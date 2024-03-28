@@ -1,6 +1,5 @@
 import { update } from "../astro-engine/astro.js";
 import { deleteObject, gameObject } from "../astro-engine/core/gameObject.js";
-import { spriteImage } from "./tile-selector.js";
 
 export let TILE_SIZE = 32;
 export let GRID_WIDTH = 50 * 32;
@@ -19,7 +18,7 @@ export const setPreviewTile = (x, y, layer, tiledId) =>  {
         size: [TILE_SIZE, TILE_SIZE],
         position: [TILE_SIZE * x, TILE_SIZE * y],
         positionPivot: [0, 1],
-        render: spriteImage.getSprite(tiledId.x, tiledId.y),
+        //render: spriteImage.getSprite(tiledId.x, tiledId.y),
     }))
 }
 
@@ -42,7 +41,7 @@ export function setTile(x, y, layer, tileId) {
     const tileObject = gameObject({
         size: [TILE_SIZE, TILE_SIZE],
         position: [TILE_SIZE * x, TILE_SIZE * y],
-        render: spriteImage.getSprite(tileId.x, tileId.y),
+        //render: spriteImage.getSprite(tileId.x, tileId.y),
         positionPivot: [0, 1],
     });
 

@@ -1,5 +1,4 @@
-import { drawTile } from "../../grid/tile-controller.js";
-import { selectedSpriteId } from "../../tile-selector.js";
+import { getSelectedSprite } from "../../tilemap/tilemap-controller.js";
 import { createTool } from "../tool-builder.js"
 import { drawLine } from "./line-tool.js";
 
@@ -13,11 +12,13 @@ const onMouseDown = tileId => {
 
 const onMouseUp = tileId => {
     brushActive = false;
+    previousTile = undefined;
 }
 
+
 const onMouseMove = tileId => {
-    if (brushActive && previousTile !== undefined)
-        drawLine(previousTile, tileId, selectedSpriteId);
+    if (brushActive && previousTile)
+        drawLine(previousTile, tileId, getSelectedSprite());
 
     previousTile = tileId;
 }

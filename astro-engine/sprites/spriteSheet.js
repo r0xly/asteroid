@@ -4,10 +4,12 @@ export class SpriteSheet {
     #image;
     #spriteWidth;
     #spriteHeight;
+    src;
 
     constructor(src, spriteWidth, spriteHeight) {
         this.#image = new Image();
         this.#image.src = src;
+        this.src = src;
         this.#spriteWidth = spriteWidth;
         this.#spriteHeight = spriteHeight;
     }

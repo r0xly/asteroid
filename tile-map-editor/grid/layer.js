@@ -2,7 +2,6 @@
 import { gameObject } from "../../astro-engine/core/gameObject.js";
 import { Vector } from "../../astro-engine/util/vector.js";
 import { GRID_HEIGHT, GRID_WIDTH, TILE_SIZE } from "../grid.js";
-import { spriteImage } from "../tile-selector.js";
 
 export class Layer {
     canvas = document.createElement("canvas");
@@ -25,24 +24,24 @@ export class Layer {
         })
     }
 
-    drawTile = (x, y, tileType) =>  {
+    drawTile = (x, y, sprite) =>  {
         y += 1;
 
         this.ctx.clearRect(x * TILE_SIZE, -y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
-        if (tileType) {
-            const { image, sx, sy, sWidth, sHeight } = spriteImage.getSprite(tileType.x, tileType.y);
+        if (sprite) {
+            const { image, sx, sy, sWidth, sHeight } = sprite;
 
             this.ctx.drawImage(image, sx, sy, sWidth, sHeight, x * TILE_SIZE, -y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
         }
     }
 
-    setTile = (x, y, tileType) => {
-        if (this.getTile(x, y) === tileType)
+    setTile = (x, y, sprite) => {
+        if (this.getTile(x, y) === sprite)
             return;
 
-        this.drawTile(x, y, tileType);
-        this.tiles.set(`${x},${y}`, tileType);
+        this.drawTile(x, y, sprite);
+        this.tiles.set(`${x},${y}`, sprite);
     }
 
     getTile = (x, y) => {

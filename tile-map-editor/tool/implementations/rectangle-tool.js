@@ -1,6 +1,7 @@
+import { Sprite } from "../../../astro-engine/sprites/sprite.js";
 import { Vector } from "../../../astro-engine/util/vector.js";
 import { clearPreview, disablePreviewMode, drawTile, enablePreviewMode } from "../../grid/tile-controller.js";
-import { selectedSpriteId } from "../../tile-selector.js";
+import { getSelectedSprite } from "../../tilemap/tilemap-controller.js";
 import { createTool } from "../tool-builder.js";
 
 
@@ -8,10 +9,10 @@ import { createTool } from "../tool-builder.js";
  * Draws a rectnalge between two points
  * @param { Vector } startPoint - The tile ID where the line starts
  * @param { Vector } endPoint - The tile ID where the line ends
- * @param { Object = } tileType - The tile to draw
+ * @param { Sprite = } sprite - The tilesprite to draw
  * @param { import("../../grid/layer.js").Layer = } layer - The layer which the tile will be drawn at  
  */
-export const drawRectangle = (startPoint, endPoint, tileType, layer) => {
+export const drawRectangle = (startPoint, endPoint, sprite, layer) => {
     const startX = Math.min(startPoint.x, endPoint.x);
     const startY = Math.min(startPoint.y, endPoint.y); 
     const endX = Math.max(startPoint.x, endPoint.x);
@@ -19,7 +20,7 @@ export const drawRectangle = (startPoint, endPoint, tileType, layer) => {
 
     for (let x = startX; x <= endX; x++)
         for (let y = startY; y <= endY; y++)
-            drawTile(x, y, tileType, layer);
+            drawTile(x, y, sprite, layer);
 }
 
 let startPoint = Vector.Zero;
@@ -36,7 +37,7 @@ const onMouseUp = tileId => {
     mouseDown = false;
 
     disablePreviewMode();
-    drawRectangle(startPoint, tileId, selectedSpriteId);
+    drawRectangle(startPoint, tileId, getSelectedSprite());
 }
 
 const onMouseMove = tileId => {
@@ -44,7 +45,7 @@ const onMouseMove = tileId => {
         return;
 
     clearPreview();
-    drawRectangle(startPoint, tileId, selectedSpriteId);
+    drawRectangle(startPoint, tileId, getSelectedSprite());
 }
 
 export const lineTool = createTool("Rectangle", "r", onMouseDown, onMouseUp, onMouseMove);;

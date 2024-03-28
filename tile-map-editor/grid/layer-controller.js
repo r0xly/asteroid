@@ -5,8 +5,8 @@ import { Layer } from "./layer.js"
 export const layerOrderMap = new Map();
 
 /**
- * Creates a new layer object 
- * @param {number} order - The order to be displayed
+ * Creates a new canvas layer object 
+ * @param {number} order - The layer which is will be rendered on
  */
 export const createLayer = (order) => {
     const layer = new Layer(order);
@@ -17,4 +17,4 @@ export const createLayer = (order) => {
 
 let activeLayer = createLayer(1);
 
-export const getSelectedLayer = () => activeLayer;
+export const getActiveLayer = () => activeLayer;

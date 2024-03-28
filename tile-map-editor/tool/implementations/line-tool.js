@@ -1,7 +1,7 @@
+import { Sprite } from "../../../astro-engine/sprites/sprite.js";
 import { Vector } from "../../../astro-engine/util/vector.js";
-import { setTile } from "../../grid.js";
 import { clearPreview, disablePreviewMode, drawTile, enablePreviewMode } from "../../grid/tile-controller.js";
-import { selectedSpriteId } from "../../tile-selector.js";
+import { getSelectedSprite } from "../../tilemap/tilemap-controller.js";
 import { createTool } from "../tool-builder.js";
 
 
@@ -9,10 +9,10 @@ import { createTool } from "../tool-builder.js";
  * Draws a line between two points
  * @param { Vector } startPoint - The tile ID where the line starts
  * @param { Vector } endPoint - The tile ID where the line ends
- * @param { Object = } tileType - The tile to draw
+ * @param { Sprite = } sprite - The tile sprite to draw
  * @param { import("../../grid/layer.js").Layer = } layer - The layer which the tile will be drawn at  
  */
-export const drawLine = (startPoint, endPoint, tileType, layer) => {
+export const drawLine = (startPoint, endPoint, sprite, layer) => {
     let x0 = startPoint.x;
     let y0 = startPoint.y;
     let x1 = endPoint.x;
@@ -25,7 +25,7 @@ export const drawLine = (startPoint, endPoint, tileType, layer) => {
     let err = dx - dy;
 
     while (true) {
-        drawTile(x0, y0, tileType, layer);
+        drawTile(x0, y0, sprite, layer);
         
         if (x0 === x1 && y0 === y1) 
             break;
@@ -52,7 +52,7 @@ const onMouseUp = tileId => {
     mouseDown = false;
 
     disablePreviewMode();
-    drawLine(startPoint, tileId, selectedSpriteId);
+    drawLine(startPoint, tileId, getSelectedSprite());
 }
 
 const onMouseMove = tileId => {
@@ -60,7 +60,7 @@ const onMouseMove = tileId => {
         return;
 
     clearPreview();
-    drawLine(startPoint, tileId, selectedSpriteId);
+    drawLine(startPoint, tileId, getSelectedSprite());
 }
 
 export const lineTool = createTool("Line", "l", onMouseDown, onMouseUp, onMouseMove);

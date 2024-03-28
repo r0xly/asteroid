@@ -8,7 +8,41 @@
     <script src="index.js" type="module" defer></script> 
 </head>
 <body>
+    <dialog id="import-tilemap-dialog">
+        <form method="dialog" id="import-tilemap-form">
+            <h1>New Tilemap</h1>
+            <label>Tileset:</label>
 
+            <label>
+                Name:
+                <input type="text" name="name" minlength="4" maxlength="16" placeholder="Tilemap 1" size="50px" required/>
+            </label>    
+
+            <label>
+                Type:
+                <select>
+                    <option value="default">default</option>
+                    <option value="auto-tiled">auto-tiled</option>
+                </select>
+            </label> 
+
+            <label>Image:</label>
+            <label>
+                Source:
+                <input type="file" name="source" accept="image/png, image/jpeg" required/>
+            </label>
+
+            <label>
+                Width:
+                <input type="number" name="width" min="1" size="10px" required/>
+                Height:
+                <input type="number" name="height" min="1" size="10px" required/>
+            </label>
+            
+            <input type="submit" value="Import"/>
+            <input type="submit" value="Cancel" formnovalidate/>
+        </form>
+    </dialog>
     <div class="header">
         <button>File</button>
         <button>Edit</button>
@@ -32,13 +66,11 @@
             <div class="window">
                 <div class="window-header">Tiles</div>
 
-                <select name="Tile" size="1">
-                    <option value="Tilemap 1">Tilemap 1</option>
-                </select>
-                <button>Import </button>
-                <div class="window-container" id="spritesheet">
-                    <div class="sprite-selector" id="sprite-selector"></div>
-                    <img src="./plains.png" id="image" style="image-rendering: pixelated; width: 384px; user-select: none; pointer-events: none;">
+                <select id="tilemap-selection-list"></select>
+                <button id="import-tilemap-button">Import </button>
+                <div class="window-container" id="tilemap-container">
+                    <div class="sprite-selector" id="tilemap-selection-box"></div>
+                    <img id="tilemap-image" style="image-rendering: pixelated; user-select: none; pointer-events: none;">
                 </div>
             </div>
 
@@ -51,19 +83,6 @@
                 </div>
             </div>
         </div>
-
-        <dialog open>
-            <form method="dialog">
-                <h1>Import Tilemap</h1>
-
-                <label for="tilemal-name">Name:</label>
-                <input type="text" id="tilemap-name" name="tilemal-name" required minlength="4" maxlength="16" placeholder="Tilemap 1"/>
-                <input type="number"/>
-                <br>
-                <button>Import</button>
-
-            </form>
-        </dialog>
 
     </div>
 </body>
